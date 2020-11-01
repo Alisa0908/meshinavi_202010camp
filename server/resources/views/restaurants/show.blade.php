@@ -19,6 +19,7 @@
                 <td>{{ $restaurant->address }}</td>
             </tr>
                 <th>カテゴリー</th>
+                {{-- {{dd($restaurant->category)}} --}}
                 <td>{{ $restaurant->category->name }}</td>
             </tr>
             <tr>
