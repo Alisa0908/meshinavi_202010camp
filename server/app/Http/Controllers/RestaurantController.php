@@ -4,13 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Restaurant;
+use App\Http\Controllers\where;
 
 class RestaurantController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $restaurants = Restaurant::all();
+        $name = $request->name;
+        $category = $request->category;
+
+        $query = Restaurant::query();
+
+        if($name) {
+            $query->where('name', 'like', '%'. $name . '%');
+        }
+        if($category) {
+            $query->where('name', 'like', '%'. $category . '%');
+        }
+
+        $restaurants = $query->simplePaginate(10);
+        $restaurants->appends(compact('name', 'category'));
+        
+        // $restaurants = Restaurant::all()->sortByDesc('recommend');
         return view('restaurants.index', compact('restaurants'));
+
     }
 
     public function show($id)
