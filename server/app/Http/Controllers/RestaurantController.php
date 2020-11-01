@@ -24,7 +24,7 @@ class RestaurantController extends Controller
             });
         }
 
-        $restaurants = $query->simplePaginate(10);
+        $restaurants = $query->simplePaginate(5);
         $restaurants->appends(compact('name', 'category'));
         
         // $restaurants = Restaurant::all()->sortByDesc('recommend');
